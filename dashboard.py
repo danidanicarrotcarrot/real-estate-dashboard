@@ -26,7 +26,7 @@ st.set_page_config(page_title="부동산 데이터 대시보드", layout="wide")
 st.title("🏡 부동산 데이터 대시보드")
 
 # 탭 메뉴
-tab1, tab2, tab3, tab4 = st.tabs(["📈 실거래가 시계열 분석", "🏙 거래가(물건금액) 분석", "🗺️ 거래량 Top30 지역", "🏢 층별 가격 분석"])
+tab1, tab2, tab3, tab4 = st.tabs(["📈 실거래가 시계열 분석", "🏙 거래가(물건금액) 분석", "🏢 층별 가격 분석", "🗺️ 거래량 Top30 지역"])
 
 # **실거래가 시계열 분석**
 with tab1:
@@ -35,7 +35,7 @@ with tab1:
     building_list = df2['지역+건물명+건물용도'].value_counts().head(30).index
     selected_building = st.selectbox("🔍 분석할 건물 선택", building_list)
     df_filtered = df2[df2['지역+건물명+건물용도'] == selected_building]
-    fig = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 실거래가 변화 추이", markers=True)
+    fig = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 실거래가 변화 추이 (~2025.01)", markers=True)
     fig.update_layout(width=1200, height=600)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -48,7 +48,7 @@ with tab1:
 
     join_df = pd.concat([df2, df3], ignore_index=True, axis=0)
     df_filtered = join_df[join_df['지역+건물명+건물용도'] == selected_building].sort_values(by='거래일')
-    fig9 = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 실거래가 변화 추이, 예측 데이터 추가", markers=True)
+    fig9 = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 실거래가 변화 추이 (~2026.01)", markers=True)
     fig9.update_layout(width=1200, height=600)
     st.plotly_chart(fig9, use_container_width=True)    
 
@@ -88,8 +88,28 @@ with tab2:
     - **p-value**: `0.00000` → 통계적으로 유의미한 결과  
     """)
 
-# 탭3: 거래량 top30
+# 탭 3: 층별 가격 분석**
 with tab3:
+    df2 = pd.read_csv(file_path2)
+    st.subheader("🏢 층별 평균 거래 금액 분석")
+    df_floor = df2.groupby('층')['물건금액'].mean().astype(int).reset_index()
+    fig3 = px.bar(df_floor, x='층', y='물건금액', color='물건금액', title="층별 평균 거래 금액")
+    fig3.update_layout(width=1200, height=600)
+    st.plotly_chart(fig3, use_container_width=True)
+
+    st.subheader("🏢 고층일수록 거래가가 높을까?")
+    df1['물건금액'] = df1['물건금액(만원)'] * 10000
+    fig8 = px.scatter(df1, x='층', y='물건금액', trendline='ols', title='층 vs 물건금액', opacity=0.6)
+    fig8.update_layout(width=1200, height=600)
+    st.plotly_chart(fig8, use_container_width=True)
+    st.markdown("""
+    #### ✅ 층과 물건금액의 상관관계 분석
+    - **상관계수**: `0.34` → 층이 높을수록 가격이 오르는 경향  
+    - **p-value**: `0.00000` → 통계적으로 유의미한 결과  
+    """)
+
+# 탭4: 거래량 top30
+with tab4:
     st.subheader("🗺️ 지역별 거래량 Top 30")
 
     df1['지역'] = df1['자치구명'] + ' ' + df1['법정동명']
@@ -139,28 +159,4 @@ with tab3:
         ).add_to(marker_cluster)
 
     # 지도 출력
-    folium_static(m, width=1650, height=800)
-
-# 탭 4: 층별 가격 분석**
-with tab4:
-    df2 = pd.read_csv(file_path2)
-    st.subheader("🏢 층별 평균 거래 금액 분석")
-    df_floor = df2.groupby('층')['물건금액'].mean().astype(int).reset_index()
-    fig3 = px.bar(df_floor, x='층', y='물건금액', color='물건금액', title="층별 평균 거래 금액")
-    fig3.update_layout(width=1200, height=600)
-    st.plotly_chart(fig3, use_container_width=True)
-
-    st.subheader("🏢 고층일수록 거래가가 높을까?")
-    df1['물건금액'] = df1['물건금액(만원)'] * 10000
-    fig8 = px.scatter(df1, x='층', y='물건금액', trendline='ols', title='층 vs 물건금액', opacity=0.6)
-    fig8.update_layout(width=1200, height=600)
-    st.plotly_chart(fig8, use_container_width=True)
-    st.markdown("""
-    #### ✅ 층과 물건금액의 상관관계 분석
-    - **상관계수**: `0.34` → 층이 높을수록 가격이 오르는 경향  
-    - **p-value**: `0.00000` → 통계적으로 유의미한 결과  
-    """)
-
-# # 실행 방법 안내
-# st.markdown("🚀 **Streamlit 실행 방법:**")
-# st.code("streamlit run app.py", language="bash")
+    folium_static(m, width=1200, height=600)
