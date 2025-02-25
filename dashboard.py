@@ -35,7 +35,7 @@ with tab1:
     building_list = df2['지역+건물명+건물용도'].value_counts().head(30).index
     selected_building = st.selectbox("🔍 분석할 건물 선택", building_list)
     df_filtered = df2[df2['지역+건물명+건물용도'] == selected_building]
-    fig = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 실거래가 변화 추이 (~2025.01)", markers=True)
+    fig = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 거래가 변화 추이 | ~2025.01", markers=True)
     fig.update_layout(width=1200, height=600)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -48,7 +48,7 @@ with tab1:
 
     join_df = pd.concat([df2, df3], ignore_index=True, axis=0)
     df_filtered = join_df[join_df['지역+건물명+건물용도'] == selected_building].sort_values(by='거래일')
-    fig9 = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 실거래가 변화 추이 (~2026.01)", markers=True)
+    fig9 = px.line(df_filtered, x='거래일', y='물건금액', title=f"{selected_building} 거래가 변화 추이 | ~2026.01", markers=True)
     fig9.update_layout(width=1200, height=600)
     st.plotly_chart(fig9, use_container_width=True)    
 
