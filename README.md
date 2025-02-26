@@ -1,37 +1,35 @@
 # 🏡 부동산 데이터 대시보드
 
-## 📌 프로젝트 개요
-이 프로젝트는 **Streamlit**, **Plotly**, **Folium**을 활용하여 부동산 거래 데이터를 시각화하는 대시보드입니다.  
+## 📌 개요
+부동산 메이트 프로젝트에서 진행한 EDA 과정을 기반으로, **Streamlit**, **Plotly**, **Folium**을 활용하여 부동산 거래 데이터를 시각화하는 대시보드입니다.  
 서울 지역의 **실거래가 시계열 분석**, **거래가 분석**, **층별 가격 분석**, **거래량 상위 지역 분석**을 제공합니다.
-
-📌 **[👉 대시보드 바로가기](https://real-estate-dashboard-lnbghjrqwopbmcmkmxazfs.streamlit.app/)**  
+- **[👉 대시보드 바로가기](https://real-estate-dashboard-lnbghjrqwopbmcmkmxazfs.streamlit.app/)**  
 
 ---
+## 📌 주요 기능
 
-## 🚀 기능 요약
-
-### 1️⃣ **실거래가 시계열 분석**
+1. **실거래가 시계열 분석**
 - 특정 건물의 **실거래가 변화 추이**를 Plotly **선 그래프**로 시각화  
 - 2025년까지의 거래 데이터 + 2026년 예측 데이터 반영  
 
-### 2️⃣ **거래가(물건금액) 분석**
+2. **거래가(물건금액) 분석**
 - **평균 거래 금액**이 높은 상위 30개 지역 시각화 (막대 그래프)  
 - 건물 면적과 가격의 관계 분석 (**산점도 + 회귀선**)  
 - 건축년도와 가격의 관계 분석 (**산점도 + 회귀선**)  
 
-### 3️⃣ **층별 가격 분석**
+3. **층별 가격 분석**
 - **층별 평균 거래 가격** 분석 (막대 그래프)  
 - 층이 높을수록 거래가가 높아지는지 확인 (산점도 + 회귀선)  
 
-### 4️⃣ **거래량 Top30 지역 분석**
+4. **거래량 Top30 지역 분석**
 - 지역별 **거래량이 높은 상위 30개 지역** 분석 (막대 그래프 & 트리맵)  
 - **해당 지역 내 건물별 거래량**을 지도(Folium)로 시각화  
 
 ---
 
-## 🛠️ 기술 스택
+## 📌 기술 스택
 
-### 📌 **사용된 라이브러리**
+**사용된 라이브러리**
 | 라이브러리  | 설명 |
 |------------|----------------------------------|
 | `streamlit` | 웹 대시보드 구축 |
@@ -40,7 +38,7 @@
 | `folium` | 지도 시각화 |
 | `streamlit_folium` | Streamlit에서 Folium 지도 렌더링 |
 
-### 📌 **데이터 파일**
+**데이터 파일**
 | 파일명 | 설명 |
 |-------------|---------------------------------------------|
 | `refined-real-estate.csv` | 전처리된 부동산 거래 데이터 |
@@ -50,21 +48,21 @@
 ---
 
 ## 📌 **향후 개선 사항**
-🚀 **추가적인 분석 기능**  
+
+**추가적인 분석 기능**  
 - 특정 지역별 **부동산 트렌드 변화 분석**  
 - 가격 변동에 영향을 미치는 **외부 요인 데이터 추가 (금리, 인구 등)**  
 
-🚀 **대시보드 UI 개선**  
+**대시보드 UI 개선**  
 - Matplotlib, Altair 등을 추가하여 다양한 시각화 제공  
 - Streamlit **sidebar 활용**하여 사용자 인터페이스 개선  
 
 ---
 
-## 📧 **문의 및 기여**
+**문의 및 기여**
 이 프로젝트에 대한 **피드백**이나 **기여**를 원하시면 PR을 보내주세요! 😊  
 - **Email**: ekgusqksksk@naver.com
-- **GitHub**: [https://github.com/danidanicarrotcarrot/real-estate-dashboard](https://github.com/danidanicarrotcarrot/real-estate-dashboard)  
-
-📌 **[👉 대시보드 바로가기](https://real-estate-dashboard-lnbghjrqwopbmcmkmxazfs.streamlit.app/)**  
+- **GitHub**: [https://github.com/danidanicarrotcarrot/real-estate-dashboard](https://github.com/danidanicarrotcarrot/real-estate-dashboard) 
+- **[👉 대시보드 바로가기](https://real-estate-dashboard-lnbghjrqwopbmcmkmxazfs.streamlit.app/)**  
 
 🚀 **대시보드를 실행해보고 개선이 필요한 부분이 있다면 알려주세요!** 🚀
